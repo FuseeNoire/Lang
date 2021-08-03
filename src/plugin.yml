@@ -1,0 +1,12 @@
+name: Lang
+author: FuséeNoire
+description: A Spigot plugin to manage locales.
+website: https://oko.moe
+version: 0.1.0
+main: moe.oko.lang.Lang
+api-version: 1.17
+commands:
+        lang:
+                description: Set or fetch your currently set locale.
+                usage: /<command> [locale]
+                aliases: []
