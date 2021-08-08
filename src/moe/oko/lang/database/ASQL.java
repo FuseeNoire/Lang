@@ -18,7 +18,24 @@ public class ASQL {
         }
     }
     
-    public static int setLocaleValue(String UUID, String Locale){
+     public static int initLocale(String UUID, String Locale){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO locale_table VALUES (?, ?)");
+            preparedStatement.setString(1, UUID);
+            preparedStatement.setString(2, Locale);
+            preparedStatement.executeQuery();
+            preparedStatement.close();
+            resultSet.close();
+            return 0;
+
+        } catch (SQLException exception) {
+            System.err.println("[DATABASE] ERROR | The moe.oko.lang.database.ASQL.initLocale function failed to execute successfully.");
+            System.err.println(exception);
+        }
+        return 0;
+    }
+
+    public static int setLocale(String UUID, String Locale){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE locale_table SET locale=? WHERE uuid=?");
             preparedStatement.setString(1, UUID);
@@ -29,12 +46,12 @@ public class ASQL {
             return 0;
 
         } catch (SQLException exception) {
-            System.err.println("[DATABASE] ERROR | The moe.oko.lang.database.ASQL.setLocaleValue function failed to execute successfully.");
+            System.err.println("[DATABASE] ERROR | The moe.oko.lang.database.ASQL.setLocale function failed to execute successfully.");
             System.err.println(exception);
         }
         return 0;
     }
-    public static String getLocaleValue(String UUID){
+    public static String getLocale(String UUID){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT locale FROM locale_table WHERE uuid=?");
             preparedStatement.setString(1, UUID);
@@ -44,7 +61,7 @@ public class ASQL {
             return resultSet.getString("locale");
 
         } catch (SQLException exception) {
-            System.err.println("[DATABASE] ERROR | The moe.oko.lang.database.ASQL.setLocaleValue function failed to execute successfully.");
+            System.err.println("[DATABASE] ERROR | The moe.oko.lang.database.ASQL.getLocale function failed to execute successfully.");
             System.err.println(exception);
         }
         return "auto";
