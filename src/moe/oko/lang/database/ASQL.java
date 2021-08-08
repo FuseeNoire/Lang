@@ -18,11 +18,11 @@ public class ASQL {
         }
     }
     
-     public static int initLocale(String UUID, String Locale){
+     public static int initLocale(String UUID){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO locale_table VALUES (?, ?)");
             preparedStatement.setString(1, UUID);
-            preparedStatement.setString(2, Locale);
+            preparedStatement.setString(2, 'auto');
             preparedStatement.executeQuery();
             preparedStatement.close();
             resultSet.close();
